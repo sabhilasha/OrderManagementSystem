@@ -5,22 +5,27 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ibm.demo.entity.Order;
+import com.ibm.demo.repo.OrderRepository;
 
 @Service
 public class OrderService { // spring bean
+	@Autowired
+	OrderRepository orderRepository;  
 	public String createOrder(@RequestBody Order order) {
-		System.out.println(order);
-		return "order created";
+		Order savedOrder = orderRepository.save(order);
+		return savedOrder.getId();
+		
 	}
 
-	public String getOrder() {
-		return "order recieved";
+	public Order getOrders() {
+		return new Order();
 	}
-	public List<Order> getOrders(int orderId) {
+	public List<Order> getOrder(int orderId) {
 		return new ArrayList<Order>();
 	}
 

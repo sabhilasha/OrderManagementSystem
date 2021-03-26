@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,12 +33,12 @@ public class OrderController { //frontend
 		return orderService.createOrder(order);
 	}
 	@GetMapping("/order")
-	String getorder() {
-		return orderService.getOrder();
+	Order getOrders() {
+		return orderService.getOrders();
 	}
-	@GetMapping("/order")
-	List<Order> getorders(@PathVariable ("id") int orderId) {
-		return orderService.getOrders(orderId);
+	@GetMapping("/order/{id}")
+	List<Order> getOrder(@PathVariable ("id") int orderId) {
+		return orderService.getOrder(orderId);
 	}
 	
 	
