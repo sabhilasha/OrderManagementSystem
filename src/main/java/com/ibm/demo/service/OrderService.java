@@ -1,9 +1,7 @@
 package com.ibm.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,18 +20,19 @@ public class OrderService { // spring bean
 		
 	}
 
-	public Order getOrders() {
-		return new Order();
+	public List<Order> getOrders() {
+		return orderRepository.findAll();
 	}
-	public List<Order> getOrder(int orderId) {
-		return new ArrayList<Order>();
+	public Optional<Order> getOrder(String orderId) {
+		return orderRepository.findById(orderId);
+
 	}
 
 	public void updateOrder(@RequestBody Order order) {
-		System.out.println(order);
+		orderRepository.save(order);
 	}
 
-	public String deleteOrder(int orderId) {
-		return "order deleted";
+	public void deleteOrder(String orderId) {
+		orderRepository.deleteById(orderId);
 	}
 }
